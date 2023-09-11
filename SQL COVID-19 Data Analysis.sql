@@ -127,30 +127,6 @@ ORDER BY total_vaccinations DESC
 
 
 
--- 4. CTEs, Temporary Tables, and Views
-	
--- CTE Utilization: leveraging Common Table Expressions for streamlined calculations and query readability
-
-WITH pop_vs_vaccinations (continent, location, date, population, new_vaccinations, total_vaccinations)
-AS
-(
-SELECT d.continent,
-	   d.location,
-	   d.date,
-	   d.population,
-	   v.new_vaccinations,
-	   SUM(CAST(v.new_vaccinations AS float)) OVER (PARTITION BY d.location ORDER BY d.location, d.date) AS total_vaccinations
-FROM Datasets..Covid_deaths_filtered d
-JOIN Datasets..Covid_vaccinations_table v
-ON d.location = v.location
-AND d.date = v.date
-)
-SELECT *, (total_vaccinations/population)*100 AS perc_pop_vs_vacc
-FROM pop_vs_v
-
-
-
-
 -- 4. CTEs, Temporary Tables and Views
 	
 -- CTE Utilization: leveraging Common Table Expressions for streamlined calculations and query readability
