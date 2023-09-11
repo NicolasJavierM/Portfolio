@@ -17,7 +17,7 @@ SELECT *
 FROM Datasets..Covid_vaccinations_table
 ORDER BY location, date
 
--- Optimizing Data Tables: cleaning and creating and filtering Covid Deaths table
+-- Optimizing Data Tables: creating a filtered Covid Deaths table
 
 CREATE VIEW Covid_deaths_filtered AS
 SELECT *
